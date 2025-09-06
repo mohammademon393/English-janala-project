@@ -17,15 +17,28 @@ const displayWord =(words) => {
     const wordContainer = document.getElementById('word-container');
     wordContainer.innerHTML = "";
 
+    // lesson 4 functionality
+    if (words.length == 0) {
+        wordContainer.innerHTML = `
+        <div class="col-span-3 text-center font-bangla">
+            <img class="mx-auto" src="../assets/alert-error.png"/>
+            <p class="font-medium my-4">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি। </p>
+            <h2 class="font-bold text-4xl mt-2">নেক্সট Lesson এ যান</h2>
+        </div>
+        `;
+        return;
+    };
+
     words.forEach(word => {
         const card = document.createElement('div');
+
         card.innerHTML = `
         
             <div class="card card-dash bg-base-100 w-96 text-center">
                 <div class="card-body space-y-4">
-                    <h2 class=" text-center text-2xl font-bold">${word.word}</h2>
+                    <h2 class=" text-center text-2xl font-bold">${word.word ? word.word : "Word ont found"}</h2>
                     <p class="font-semibold">Meaning /Pronounciation</p>
-                    <span class="font-bangla text-2xl  ">${word.meaning} / ${word.pronunciation}"</span>
+                    <span class="font-bangla text-2xl  ">${word.meaning ? word.meaning : "meaning not found"} / ${word.pronunciation ? word.pronunciation : "pronunciation not found"}"</span>
                     <div class="flex justify-between">
                         <button class="btn btn-outline btn-primary rounded-full"><i class="fa-solid fa-circle-info"></i>
                         </button>
